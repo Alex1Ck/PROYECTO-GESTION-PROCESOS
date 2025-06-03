@@ -3,28 +3,88 @@
 
 using namespace std;
 
-int main() {
-    char cadena[200];
-    char subcadena[100];
-    char* posicion;
+// ESTRUCTURA DEL PROCESO
+struct Proceso {
+    int id;
+    string nombre;
+    int prioridad;
+    Proceso* siguiente;
+};
 
-    cout << "Introduce la cadena principal: ";
-    cin.getline(cadena, 200);
-
-    cout << "Introduce la subcadena a buscar: ";
-    cin.getline(subcadena, 100);
-
-    // Buscar la subcadena en la cadena principal
-    posicion = strstr(cadena, subcadena);
-
-    if (posicion != NULL) {
-        // Calcular la posicion encontrando la distancia desde el inicio
-        int indice = posicion - cadena;
-        cout << "La subcadena se encontro en la posicion: " << indice << endl;
-    } else {
-        cout << "La subcadena no se encontro en la cadena principal." << endl;
+// LISTA ENLAZADA DEL GESTOR DE PROCESOS
+class GestorProcesos {
+private:
+    Proceso* cabeza;
+public:
+    GestorProcesos() {
+        cabeza = NULL;
     }
 
-    return 0;
-}
+    void insertarProceso(int id, string nombre, int prioridad) {
+        Proceso* nuevo = new Proceso;
+        nuevo->id = id;
+        nuevo->nombre = nombre;
+        nuevo->prioridad = prioridad;
+        nuevo->siguiente = NULL;
+
+        if (cabeza == NULL) {
+            cabeza = nuevo;
+        } else {
+            Proceso* temp = cabeza;
+            while (temp->siguiente != NULL) temp = temp->siguiente;
+            temp->siguiente = nuevo;
+        }
+        cout << "Proceso insertado.\n";
+    }
+
+    void eliminarProceso(int id) {
+        Proceso* temp = cabeza;
+        Proceso* anterior = NULL;
+        while (temp != NULL && temp->id != id) {
+            anterior = temp;
+            temp = temp->siguiente;
+        }
+        if (temp == NULL) {
+            cout << "Proceso no encontrado.\n";
+            return;
+        }
+        if (anterior == NULL) cabeza = temp->siguiente;
+        else anterior->siguiente = temp->siguiente;
+        delete temp;
+        cout << "Proceso eliminado.\n";
+    }
+
+    void buscarProceso(int id) {
+        Proceso* temp = cabeza;
+        while (temp != NULL) {
+            if (temp->id == id) {
+                cout << "ID: " << temp->id << " | Nombre: " << temp->nombre << " | Prioridad: " << temp->prioridad << endl;
+                return;
+            }
+            temp = temp->siguiente;
+        }
+        cout << "Proceso no encontrado.\n";
+    }
+
+    void modificarPrioridad(int id, int nuevaPrioridad) {
+        Proceso* temp = cabeza;
+        while (temp != NULL) {
+            if (temp->id == id) {
+                temp->prioridad = nuevaPrioridad;
+                cout << "Prioridad modificada.\n";
+                return;
+            }
+            temp = temp->siguiente;
+        }
+        cout << "Proceso no encontrado.\n";
+    }
+
+    void mostrarProcesos() {
+	    Proceso* temp = cabeza;
+	    while (temp != NULL) {
+	        cout << "ID: " << temp->id << ", Nombre: " << temp->nombre << ", Prioridad: " << temp->prioridad << endl;
+	        temp = temp->siguiente;
+	    }
+	}
+};
 
