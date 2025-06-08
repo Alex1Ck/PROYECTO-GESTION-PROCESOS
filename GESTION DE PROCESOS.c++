@@ -105,3 +105,59 @@ public:
 	    return cabeza;
 	}
 };
+
+// NODO PARA LA COLA DE PRIORIDAD
+struct NodoCola {
+    Proceso* proceso;
+    NodoCola* siguiente;
+};
+// COLA DE PRIORIDAD PARA EL PLANIFICADOR DE CPU
+class PlanificadorCPU {
+private:
+    NodoCola* cabeza;                // Puntero al primer nodo de la cola
+public:
+    PlanificadorCPU() {
+        cabeza = NULL;               // Inicialmente, la cola estÃ¡ vacÃ­a
+    }
+    // Encolar un proceso segÃºn su prioridad
+    void encolarProceso(Proceso* proceso) {
+        NodoCola* nuevoNodo = new NodoCola;
+        nuevoNodo->proceso = proceso;
+        nuevoNodo->siguiente = NULL;
+        if (cabeza == NULL || proceso->prioridad > cabeza->proceso->prioridad) {
+            nuevoNodo->siguiente = cabeza;
+            cabeza = nuevoNodo;
+        } else {
+            NodoCola* temporal = cabeza;
+            while (temporal->siguiente != NULL && proceso->prioridad <= temporal->siguiente->proceso->prioridad) {
+                temporal = temporal->siguiente;
+            }
+            nuevoNodo->siguiente = temporal->siguiente;
+            temporal->siguiente = nuevoNodo;
+        }
+        cout << "Su proceso fue encolado correctamente (^^)\n";
+    }
+    // Desencolar y 'ejecutar' un proceso
+    void desencolarProceso() {
+        if (cabeza == NULL) {
+            cout << "No hay procesos en la cola (T-T)\n";
+            return;
+        }
+        NodoCola* nodo = cabeza;
+        cabeza = cabeza->siguiente;
+        cout << "Ejecutando proceso: ID " << nodo->proceso->identificador << ", Nombre " << nodo->proceso->nombre << ", Prioridad " << nodo->proceso->prioridad << " (O.O)\n";
+        delete nodo;
+    }
+    // Mostrar la cola actual
+    void mostrarCola() {
+        NodoCola* temporal = cabeza;
+        if (temporal == NULL) {
+            cout << "La cola estÃ¡ vacÃ­a (T-T)\n";
+            return;
+        }
+        while (temporal != NULL) {
+            cout << "ID: " << temporal->proceso->identificador << ", Nombre: " << temporal->proceso->nombre << ", Prioridad: " << temporal->proceso->prioridad << " (O.O)\n";
+            temporal = temporal->siguiente;
+        }
+    }
+};
