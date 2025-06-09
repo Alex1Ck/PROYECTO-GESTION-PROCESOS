@@ -160,14 +160,7 @@ public:
 };
 
 // PILA PARA EL GESTOR DE MEMORIA
-class GestorDeMemoria {
-private:
-    Proceso* tope;                   // Puntero al tope de la pila
 
-public:
-    GestorDeMemoria() {
-        tope = NULL;                 // Inicialmente, la pila está vacía
-    }
     // Asignar memoria a un proceso (push)
     void asignarMemoria(Proceso* proceso) {
         proceso->siguiente = tope;
