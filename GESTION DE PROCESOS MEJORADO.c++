@@ -21,7 +21,14 @@ public:
         cabeza = NULL;               // Inicialmente, la lista está vacía
     }
 
-
+    // Inserta un nuevo proceso al final de la lista
+    void insertarProceso(int identificador, string nombre, int prioridad) {
+        Proceso* nuevoProceso = new Proceso;
+        nuevoProceso->identificador = identificador;
+        nuevoProceso->nombre = nombre;
+        nuevoProceso->prioridad = prioridad;
+        nuevoProceso->siguiente = NULL;
+    
         if (cabeza == NULL) {
             cabeza = nuevoProceso;
         } else {
