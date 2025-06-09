@@ -27,6 +27,7 @@ public:
         nuevoProceso->nombre = nombre;
         nuevoProceso->prioridad = prioridad;
         nuevoProceso->siguiente = NULL;
+
         if (cabeza == NULL) {
             cabeza = nuevoProceso;
         } else {
@@ -35,7 +36,7 @@ public:
                 temporal = temporal->siguiente;
             temporal->siguiente = nuevoProceso;
         }
-        cout << "Su proceso fue agregado correctamente (^^)\n";
+        cout << "Su proceso fue añadido correctamente (^^)\n";
     }
     // Elimina un proceso por su ID
     void eliminarProceso(int identificador) {
@@ -147,7 +148,7 @@ public:
     void mostrarCola() {
         NodoCola* temporal = cabeza;
         if (temporal == NULL) {
-            cout << "La cola esta vacia (T-T)\n";
+            cout << "La cola está vacía (T-T)\n";
             return;
         }
         while (temporal != NULL) {
