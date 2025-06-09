@@ -18,7 +18,7 @@ private:
 
 public:
     GestorDeProcesos() {
-        cabeza = NULL;               // Inicialmente, la lista está vacía
+        cabeza = NULL;               // Inicialmente, la lista estÃ¡ vacÃ­a
     }
 
     // Inserta un nuevo proceso al final de la lista
@@ -28,7 +28,7 @@ public:
         nuevoProceso->nombre = nombre;
         nuevoProceso->prioridad = prioridad;
         nuevoProceso->siguiente = NULL;
-    
+
         if (cabeza == NULL) {
             cabeza = nuevoProceso;
         } else {
@@ -37,8 +37,9 @@ public:
                 temporal = temporal->siguiente;
             temporal->siguiente = nuevoProceso;
         }
-        cout << "Su proceso fue añadido correctamente (^^)\n";
+        cout << "Su proceso fue agregado correctamente (^^)\n";
     }
+
     // Elimina un proceso por su ID
     void eliminarProceso(int identificador) {
         Proceso* temporal = cabeza;
@@ -58,6 +59,7 @@ public:
         delete temporal;
         cout << "Su proceso fue eliminado correctamente (^^)\n";
     }
+
     // Busca un proceso por su ID y lo muestra
     void buscarProceso(int identificador) {
         Proceso* temporal = cabeza;
@@ -70,6 +72,7 @@ public:
         }
         cout << "Su proceso no fue encontrado (T-T)\n";
     }
+
     // Modifica la prioridad de un proceso existente
     void modificarPrioridad(int identificador, int nuevaPrioridad) {
         Proceso* temporal = cabeza;
@@ -83,6 +86,7 @@ public:
         }
         cout << "Su proceso no fue encontrado (T-T)\n";
     }
+
     // Muestra todos los procesos registrados
     void mostrarProcesos() {
         Proceso* temporal = cabeza;
@@ -95,6 +99,7 @@ public:
             temporal = temporal->siguiente;
         }
     }
+
     // Devuelve el puntero al primer proceso de la lista
     Proceso* obtenerCabeza() {
         return cabeza;
