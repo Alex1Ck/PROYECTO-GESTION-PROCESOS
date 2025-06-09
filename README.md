@@ -20,7 +20,6 @@ public:
     GestorDeProcesos() {
         cabeza = NULL;               // Inicialmente, la lista está vacía
     }
-
     // Inserta un nuevo proceso al final de la lista
     void insertarProceso(int identificador, string nombre, int prioridad) {
         Proceso* nuevoProceso = new Proceso;
@@ -28,7 +27,6 @@ public:
         nuevoProceso->nombre = nombre;
         nuevoProceso->prioridad = prioridad;
         nuevoProceso->siguiente = NULL;
-
         if (cabeza == NULL) {
             cabeza = nuevoProceso;
         } else {
@@ -37,9 +35,8 @@ public:
                 temporal = temporal->siguiente;
             temporal->siguiente = nuevoProceso;
         }
-        cout << "Su proceso fue añadido correctamente (^^)\n";
+        cout << "Su proceso fue agregado correctamente (^^)\n";
     }
-
     // Elimina un proceso por su ID
     void eliminarProceso(int identificador) {
         Proceso* temporal = cabeza;
@@ -59,7 +56,6 @@ public:
         delete temporal;
         cout << "Su proceso fue eliminado correctamente (^^)\n";
     }
-
     // Busca un proceso por su ID y lo muestra
     void buscarProceso(int identificador) {
         Proceso* temporal = cabeza;
@@ -72,21 +68,19 @@ public:
         }
         cout << "Su proceso no fue encontrado (T-T)\n";
     }
-
     // Modifica la prioridad de un proceso existente
     void modificarPrioridad(int identificador, int nuevaPrioridad) {
         Proceso* temporal = cabeza;
         while (temporal != NULL) {
             if (temporal->identificador == identificador) {
                 temporal->prioridad = nuevaPrioridad;
-                cout << "Sy prioridad fue modificada correctamente (^^)\n";
+                cout << "Su prioridad fue modificada correctamente (^^)\n";
                 return;
             }
             temporal = temporal->siguiente;
         }
         cout << "Su proceso no fue encontrado (T-T)\n";
     }
-
     // Muestra todos los procesos registrados
     void mostrarProcesos() {
         Proceso* temporal = cabeza;
@@ -99,7 +93,6 @@ public:
             temporal = temporal->siguiente;
         }
     }
-
     // Devuelve el puntero al primer proceso de la lista
     Proceso* obtenerCabeza() {
         return cabeza;
@@ -121,13 +114,11 @@ public:
     PlanificadorCPU() {
         cabeza = NULL;               // Inicialmente, la cola está vacía
     }
-
     // Encolar un proceso según su prioridad
     void encolarProceso(Proceso* proceso) {
         NodoCola* nuevoNodo = new NodoCola;
         nuevoNodo->proceso = proceso;
         nuevoNodo->siguiente = NULL;
-
         if (cabeza == NULL || proceso->prioridad > cabeza->proceso->prioridad) {
             nuevoNodo->siguiente = cabeza;
             cabeza = nuevoNodo;
@@ -139,9 +130,8 @@ public:
             nuevoNodo->siguiente = temporal->siguiente;
             temporal->siguiente = nuevoNodo;
         }
-        cout << "Su proceso fue encolado correctamente (^^)\n";
+        cout << "Su proceso fue encontrado correctamente (^^)\n";
     }
-
     // Desencolar y 'ejecutar' un proceso
     void desencolarProceso() {
         if (cabeza == NULL) {
@@ -153,12 +143,11 @@ public:
         cout << "Ejecutando proceso: ID " << nodo->proceso->identificador << ", Nombre " << nodo->proceso->nombre << ", Prioridad " << nodo->proceso->prioridad << " (O.O)\n";
         delete nodo;
     }
-
     // Mostrar la cola actual
     void mostrarCola() {
         NodoCola* temporal = cabeza;
         if (temporal == NULL) {
-            cout << "La cola está vacía (T-T)\n";
+            cout << "La cola esta vacia (T-T)\n";
             return;
         }
         while (temporal != NULL) {
@@ -177,14 +166,12 @@ public:
     GestorDeMemoria() {
         tope = NULL;                 // Inicialmente, la pila está vacía
     }
-
     // Asignar memoria a un proceso (push)
     void asignarMemoria(Proceso* proceso) {
         proceso->siguiente = tope;
         tope = proceso;
         cout << "La memoria fue asignada correctamente (^^)\n";
     }
-
     // Liberar memoria (pop)
     void liberarMemoria() {
         if (tope == NULL) {
@@ -196,12 +183,11 @@ public:
         cout << "La memoria fue liberada correctamente (^^)\n";
         delete temporal;
     }
-
     // Verificar el estado actual de la memoria
     void verificarEstadoMemoria() {
         Proceso* temporal = tope;
         if (temporal == NULL) {
-            cout << "La memoria está vacía (T-T)\n";
+            cout << "La memoria esta vacia (T-T)\n";
             return;
         }
         cout << "El estado actual de la memoria es: (O.O)\n";
@@ -234,14 +220,12 @@ int main() {
     GestorDeProcesos gestorProcesos;
     PlanificadorCPU planificadorCPU;
     GestorDeMemoria gestorMemoria;
-
     int opcion;
     do {
         mostrarMenu();
-        cout << "Ingrese una opción: ";
+        cout << "Ingrese una opcion: ";
         cin >> opcion;
         cin.ignore(); // Limpiar el buffer de entrada
-
         switch (opcion) {
             case 1: {
                 int id, prioridad;
@@ -328,9 +312,8 @@ int main() {
                 cout << "Hasta luegoo... ^^\n";
                 break;
             default:
-                cout << "La opción es inválida (T-T)\n";
+                cout << "La opcion es invalida (T-T)\n";
         }
     } while (opcion != 0);
-
     return 0;
 }
