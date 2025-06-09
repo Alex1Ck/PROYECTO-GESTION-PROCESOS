@@ -20,7 +20,6 @@ public:
     GestorDeProcesos() {
         cabeza = NULL;               // Inicialmente, la lista estÃ¡ vacÃ­a
     }
-
     // Inserta un nuevo proceso al final de la lista
     void insertarProceso(int identificador, string nombre, int prioridad) {
         Proceso* nuevoProceso = new Proceso;
@@ -39,7 +38,6 @@ public:
         }
         cout << "Su proceso fue agregado correctamente (^^)\n";
     }
-
     // Elimina un proceso por su ID
     void eliminarProceso(int identificador) {
         Proceso* temporal = cabeza;
@@ -59,7 +57,6 @@ public:
         delete temporal;
         cout << "Su proceso fue eliminado correctamente (^^)\n";
     }
-
     // Busca un proceso por su ID y lo muestra
     void buscarProceso(int identificador) {
         Proceso* temporal = cabeza;
@@ -72,7 +69,6 @@ public:
         }
         cout << "Su proceso no fue encontrado (T-T)\n";
     }
-
     // Modifica la prioridad de un proceso existente
     void modificarPrioridad(int identificador, int nuevaPrioridad) {
         Proceso* temporal = cabeza;
@@ -86,7 +82,6 @@ public:
         }
         cout << "Su proceso no fue encontrado (T-T)\n";
     }
-
     // Muestra todos los procesos registrados
     void mostrarProcesos() {
         Proceso* temporal = cabeza;
@@ -99,13 +94,11 @@ public:
             temporal = temporal->siguiente;
         }
     }
-
     // Devuelve el puntero al primer proceso de la lista
     Proceso* obtenerCabeza() {
         return cabeza;
     }
 };
-
 // NODO PARA LA COLA DE PRIORIDAD
 struct NodoCola {
     Proceso* proceso;
@@ -116,7 +109,6 @@ struct NodoCola {
 class PlanificadorCPU {
 private:
     NodoCola* cabeza;                // Puntero al primer nodo de la cola
-
 public:
     PlanificadorCPU() {
         cabeza = NULL;               // Inicialmente, la cola está vacía
@@ -165,7 +157,6 @@ public:
 };
 
 // PILA PARA EL GESTOR DE MEMORIA
-
     // Asignar memoria a un proceso (push)
     void asignarMemoria(Proceso* proceso) {
         proceso->siguiente = tope;
